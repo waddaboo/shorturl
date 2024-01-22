@@ -41,6 +41,8 @@ DATABASE_URL="{YOUR_POSTGRESQL_DATABASE_URL}"
 npm run local
 ```
 
+5. API can then be accessed at http://localhost:8080/v1.0/
+
 ## API Documentation
 
 For detailed instructions on specific API usage, please refer to the link [here](https://documenter.getpostman.com/view/15205486/2s9Ykn92ZV)
