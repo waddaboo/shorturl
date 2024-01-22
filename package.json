@@ -1,0 +1,69 @@
+{
+  "name": "shorturl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "local": "dotenv -e .env.local -- nodemon --exec npx ts-node --files src/index.ts",
+    "test": "dotenv -e .env.local -- ts-mocha --recursive src/tests/*.ts --exit",
+    "start:local": "concurrently \"dotenv -e .env.local -- npx tsc --watch\" \"dotenv -e .env.local -- nodemon -q dist/index.js\"",
+    "db:init:local": "dotenv -e .env.local -- npx prisma generate",
+    "db:update:local": "dotenv -e .env.local -- npx aurora && prisma format",
+    "db:migrate:local": "dotenv -e .env.local -- npx prisma migrate dev",
+    "db:reset:local": "dotenv -e .env.local -- npx prisma migrate reset",
+    "db:pull:local": "dotenv -e .env.local -- npx prisma db pull"
+  },
+  "prisma": {
+    "schema": "src/prisma/schema.prisma"
+  },
+  "keywords": [
+    "url-shortener"
+  ],
+  "author": {
+    "name": "Chong Han Wen",
+    "email": "hanwen.chong@gmail.com",
+    "url": "https://github.com/waddaboo"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "5.8.1",
+    "compression": "1.7.4",
+    "cors": "2.8.5",
+    "dotenv": "16.3.1",
+    "dotenv-cli": "7.3.0",
+    "express": "4.18.2",
+    "express-useragent": "1.0.15",
+    "http-errors": "2.0.0",
+    "nanoid": "3.3.4",
+    "url-exists-deep": "2.1.4",
+    "url-metadata": "3.3.1",
+    "zod": "3.22.4",
+    "zod-error": "1.5.0"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.21",
+    "@types/mocha": "10.0.6",
+    "@types/supertest": "6.0.2",
+    "@typescript-eslint/eslint-plugin": "6.0.0",
+    "@typescript-eslint/parser": "6.0.0",
+    "concurrently": "8.2.2",
+    "eslint": "8.2.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-airbnb-typescript": "17.1.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-import": "2.29.1",
+    "eslint-plugin-markdown": "3.0.1",
+    "eslint-plugin-prettier": "5.1.3",
+    "mocha": "10.2.0",
+    "nodemon": "3.0.2",
+    "prettier": "3.2.2",
+    "prisma": "5.8.1",
+    "prisma-aurora": "1.3.9",
+    "supertest": "6.3.4",
+    "ts-mocha": "10.0.0",
+    "ts-node": "10.9.2",
+    "typescript": "5.3.3"
+  }
+}

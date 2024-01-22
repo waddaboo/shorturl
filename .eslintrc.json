@@ -1,0 +1,25 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "extends": ["airbnb-base", "airbnb-typescript/base", "prettier"],
+  "plugins": ["prettier", "markdown", "import"],
+  "parserOptions": {
+    "ecmaVersion": 13,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "no-unused-expressions": "off",
+    "import/no-dynamic-require": "off",
+    "global-require": "off",
+    "func-names": "off",
+    "no-unused-vars": "off",
+    "no-console": "off",
+    "prettier/prettier": "error",
+    "max-len": ["error", 100],
+    "@typescript-eslint/no-unused-vars": "off"
+  }
+}

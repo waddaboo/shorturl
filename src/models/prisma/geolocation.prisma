@@ -1,0 +1,21 @@
+model Geolocation {
+  id           String   @id @default(uuid())
+  url          Url      @relation(fields: [urlId], references: [id], onDelete: Cascade)
+  urlId        String
+  ip           String?
+  country      String?
+  country_name String?
+  city         String?
+  region       String?
+  postal       String?
+  latitude     Float?
+  longitude    Float?
+  timezone     String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Url {
+  id          String        @id @default(uuid())
+  Geolocation Geolocation[]
+}
