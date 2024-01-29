@@ -41,7 +41,9 @@ DATABASE_URL="{YOUR_POSTGRESQL_DATABASE_URL}"
 npm run local
 ```
 
-5. API can then be accessed at http://localhost:8080/v1.0/
+5. API can then be accessed at http://localhost:8080/shorturl/api/v1.0/
+
+6. Alternatively, hosted API can be accessed at https://shorturl-412709.as.r.appspot.com/shorturl/api/v1.0
 
 ## API Documentation
 

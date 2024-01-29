@@ -75,10 +75,10 @@ describe('URL TEST', () => {
       }).timeout(30000);
     });
 
-    describe('GET /url/redirect/:shortUrl', () => {
+    describe('GET /url/redirect/front/:shortUrl', () => {
       it('should redirect successfully', async () => {
         const response = await request(app)
-          .get(`${url}/url/redirect/${shortUrl}`)
+          .get(`${url}/url/redirect/front/${shortUrl}`)
           .set('Content-Type', 'application/json')
           .expect(200);
         equal(response.body, 'https://www.google.com/');
@@ -86,6 +86,19 @@ describe('URL TEST', () => {
       it('click count should +1', async () => {
         const response = await getShortUrlByShortUrl(shortUrl);
         equal(response?.clicks, 1);
+      });
+    });
+
+    describe('GET /url/redirect/:shortUrl', () => {
+      it('should redirect successfully', async () => {
+        await request(app)
+          .get(`${url}/url/redirect/${shortUrl}`)
+          .set('Content-Type', 'application/json')
+          .expect(302);
+      });
+      it('click count should +1', async () => {
+        const response = await getShortUrlByShortUrl(shortUrl);
+        equal(response?.clicks, 2);
       });
     });
 

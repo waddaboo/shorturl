@@ -57,7 +57,7 @@ export const postNewShortUrlController = async (
   }
 };
 
-export const redirectShortUrlController = async (
+export const frontendRedirectShortUrlController = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -93,6 +93,47 @@ export const redirectShortUrlController = async (
     }
 
     return res.status(200).json(url.targetUrl);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+export const redirectShortUrlController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { ip } = req;
+    const { shortUrl } = req.params;
+
+    const url = await getShortUrlByShortUrl(shortUrl);
+
+    if (!url) {
+      return res.status(404).json({ message: 'Invalid short URL' });
+    }
+
+    await updateShortUrlClicksById(url.id);
+
+    if (ip) {
+      const ipGeo = await getGeolocationFromIp(ip);
+
+      if (ipGeo) {
+        await createGeolocation(url.id, {
+          ip,
+          country: ipGeo.country,
+          country_name: ipGeo.country_name,
+          city: ipGeo.city,
+          region: ipGeo.region,
+          postal: ipGeo.postal,
+          latitude: ipGeo.latitude,
+          longitude: ipGeo.longitude,
+          timezone: ipGeo.timezone,
+        });
+      }
+    }
+
+    return res.status(301).redirect(url.targetUrl);
   } catch (err) {
     return next(err);
   }
